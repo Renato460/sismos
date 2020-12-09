@@ -1,6 +1,6 @@
 //Servicio service worker
 if(navigator.serviceWorker){
-    if(window.location.href.includes("localhost")){
+    if(window.location.href.includes("localhost")|| window.location.href.includes("127.0.0.1")){
         navigator.serviceWorker.register("/sw.js");
     }else{
         navigator.serviceWorker.register("/sismos/sw.js");
@@ -22,25 +22,7 @@ window.mostrar = function(respuesta){
         copia.querySelector('.map').id = "map"+i;
         
         let mapa = copia.querySelector('.map');
-        //init(mapa,sismo.Latitud, sismo.Longitud);
-
-        let map = new ol.Map({
-            target: mapa,
-            layers: [
-              new ol.layer.Tile({
-                source: new ol.source.OSM()
-                
-              })
-            ],
-            view: new ol.View({
-              center: ol.proj.fromLonLat([sismo.Longitud, sismo.Latitud]),
-              zoom: 6,
-              constrantOnlyCenter: true
-            })
-          });
-
-
-
+        init(mapa,sismo.Latitud, sismo.Longitud);
 
         contenedor.appendChild(copia);
         copia.querySelector('.ol-zoom-out').classList.add('d-none');
@@ -49,7 +31,7 @@ window.mostrar = function(respuesta){
     }
 };
 
-/*window.init = function(mapa, lat, long){
+window.init = function(mapa, lat, long){
     
     var map = new ol.Map({
         target: mapa,
@@ -66,7 +48,7 @@ window.mostrar = function(respuesta){
         })
       });
       
-}*/
+}
 
 
 window.addEventListener('DOMContentLoaded', async ()=>{

@@ -1,0 +1,31 @@
+{
+    "short_name":"Sismos",
+    "name": "Sismos Chile",
+    "start_url": "index.html",
+    "background_color": "#adff2f",
+    "theme_color": "#adff2f",
+    "display": "standalone",
+    "orientation": "portrait",
+    "icons":[
+        {
+            "src":"img/icons/Sismo-48x48.png",
+            "type":"image/png",
+            "sizes":"48x48"
+        },
+        {
+            "src":"img/icons/Sismo-72x72.png",
+            "type":"image/png",
+            "sizes":"72x72"
+        },
+        {
+            "src":"img/icons/Sismo-96x96.png",
+            "type":"image/png",
+            "sizes":"96x96"
+        },
+        {
+            "src":"img/icons/Sismo-192x192.png",
+            "type":"image/png",
+            "sizes":"192x192"
+        }
+    ]
+}
