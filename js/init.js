@@ -33,7 +33,7 @@ window.mostrar = function(respuesta){
 
 window.init = function(mapa, lat, long){
     
-    var map = new ol.Map({
+    let map = new ol.Map({
         target: mapa,
         layers: [
           new ol.layer.Tile({
