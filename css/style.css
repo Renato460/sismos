@@ -1,3 +1,13 @@
+header{
+    height: 15vh;
+}
 .map{
-    height: 200px;
+    height: 30vh;
+}
+
+.fa-bullseye{
+    z-index: 1000;
+}
+.card-body{
+    pointer-events: none;;
 }

@@ -1,18 +1,11 @@
-
-function init(mapa, lat, long){
-    var map = new ol.Map({
-        target: mapa,
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([long, lat]),
-          zoom: 6
-        })
-      });
-
+//Servicio service worker
+if(navigator.serviceWorker){
+    if(window.location.href.includes("localhost")){
+        navigator.serviceWorker.register("/sw.js");
+    }else{
+        navigator.serviceWorker.register("/sismos/sw.js");
+    }
+    
 }
 
 window.mostrar = function(respuesta){
@@ -24,17 +17,57 @@ window.mostrar = function(respuesta){
         let copia = molde.cloneNode(true);
         copia.querySelector('.nombre-titulo').innerText = sismo.RefGeografica;
         copia.querySelector('.fecha').innerText = "Fecha: "+sismo.Fecha;
-        copia.querySelector('.magnitud').innerText = "Magnitud: "+sismo.Magnitud+' "Richter"';
+        copia.querySelector('.magnitud').innerText = "Magnitud: "+sismo.Magnitud;
         copia.querySelector('.profundidad').innerText = "Profundidad: "+ sismo.Profundidad+" Klm";
         copia.querySelector('.map').id = "map"+i;
-        let mapa = copia.querySelector('.map');
-        init(mapa,sismo.Latitud, sismo.Longitud);
-        contenedor.appendChild(copia);
-    }
-    
-
         
+        let mapa = copia.querySelector('.map');
+        //init(mapa,sismo.Latitud, sismo.Longitud);
+
+        let map = new ol.Map({
+            target: mapa,
+            layers: [
+              new ol.layer.Tile({
+                source: new ol.source.OSM()
+                
+              })
+            ],
+            view: new ol.View({
+              center: ol.proj.fromLonLat([sismo.Longitud, sismo.Latitud]),
+              zoom: 6,
+              constrantOnlyCenter: true
+            })
+          });
+
+
+
+
+        contenedor.appendChild(copia);
+        copia.querySelector('.ol-zoom-out').classList.add('d-none');
+        copia.querySelector('.ol-zoom-in').classList.add('d-none');
+       // console.log(mapa,sismo.Latitud,sismo.Longitud);
+    }
 };
+
+/*window.init = function(mapa, lat, long){
+    
+    var map = new ol.Map({
+        target: mapa,
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+            
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([long, lat]),
+          zoom: 6,
+          constrantOnlyCenter: true
+        })
+      });
+      
+}*/
+
 
 window.addEventListener('DOMContentLoaded', async ()=>{
     let conta = 0;
